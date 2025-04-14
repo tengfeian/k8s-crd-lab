@@ -1,0 +1,11 @@
+apiVersion: websitegroup.example.com/v1alpha1
+kind: Website
+metadata:
+  labels:
+    app.kubernetes.io/name: k8s-crd-lab
+    app.kubernetes.io/managed-by: kustomize
+  name: website-sample
+spec:
+  # TODO(user): Add fields here
+  name: demo-website
+  locked: false

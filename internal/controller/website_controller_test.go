@@ -27,10 +27,10 @@ import (
 
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 
-	customoperatork8comv1alpha1 "github.com/dilipkumardk/S3ObjectStoreController/api/v1alpha1"
+	websitegroupv1alpha1 "github.com/tengfeian/k8s-crd-lab/api/v1alpha1"
 )
 
-var _ = Describe("S3ObjStore Controller", func() {
+var _ = Describe("Website Controller", func() {
 	Context("When reconciling a resource", func() {
 		const resourceName = "test-resource"
 
@@ -40,13 +40,13 @@ var _ = Describe("S3ObjStore Controller", func() {
 			Name:      resourceName,
 			Namespace: "default", // TODO(user):Modify as needed
 		}
-		s3objstore := &customoperatork8comv1alpha1.S3ObjStore{}
+		website := &websitegroupv1alpha1.Website{}
 
 		BeforeEach(func() {
-			By("creating the custom resource for the Kind S3ObjStore")
-			err := k8sClient.Get(ctx, typeNamespacedName, s3objstore)
+			By("creating the custom resource for the Kind Website")
+			err := k8sClient.Get(ctx, typeNamespacedName, website)
 			if err != nil && errors.IsNotFound(err) {
-				resource := &customoperatork8comv1alpha1.S3ObjStore{
+				resource := &websitegroupv1alpha1.Website{
 					ObjectMeta: metav1.ObjectMeta{
 						Name:      resourceName,
 						Namespace: "default",
@@ -59,16 +59,16 @@ var _ = Describe("S3ObjStore Controller", func() {
 
 		AfterEach(func() {
 			// TODO(user): Cleanup logic after each test, like removing the resource instance.
-			resource := &customoperatork8comv1alpha1.S3ObjStore{}
+			resource := &websitegroupv1alpha1.Website{}
 			err := k8sClient.Get(ctx, typeNamespacedName, resource)
 			Expect(err).NotTo(HaveOccurred())
 
-			By("Cleanup the specific resource instance S3ObjStore")
+			By("Cleanup the specific resource instance Website")
 			Expect(k8sClient.Delete(ctx, resource)).To(Succeed())
 		})
 		It("should successfully reconcile the resource", func() {
 			By("Reconciling the created resource")
-			controllerReconciler := &S3ObjStoreReconciler{
+			controllerReconciler := &WebsiteReconciler{
 				Client: k8sClient,
 				Scheme: k8sClient.Scheme(),
 			}

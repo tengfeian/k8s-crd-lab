@@ -22,7 +22,6 @@ import (
 
 // EDIT THIS FILE!  THIS IS SCAFFOLDING FOR YOU TO OWN!
 // NOTE: json tags are required.  Any new fields you add must have json tags for the fields to be serialized.
-
 const (
 	PENDING_STATE  = "PENDING"
 	CREATED_STATE  = "CREATED"
@@ -30,18 +29,19 @@ const (
 	ERROR_STATE    = "ERROR"
 )
 
-// S3ObjStoreSpec defines the desired state of S3ObjStore
-type S3ObjStoreSpec struct {
+// WebsiteSpec defines the desired state of Website
+type WebsiteSpec struct {
 	// INSERT ADDITIONAL SPEC FIELDS - desired state of cluster
 	// Important: Run "make" to regenerate code after modifying this file
 
-	// Foo is an example field of S3ObjStore. Edit s3objstore_types.go to remove/update
-	Name   string `json:"name"`
-	Locked bool   `json:"locked"`
+	// Name is the name of the Website we want to create.
+	Name string `json:"name"`
+	// Locked prevents the deletion of website.
+	Locked bool `json:"locked"`
 }
 
-// S3ObjStoreStatus defines the observed state of S3ObjStore
-type S3ObjStoreStatus struct {
+// WebsiteStatus defines the observed state of Website
+type WebsiteStatus struct {
 	// INSERT ADDITIONAL STATUS FIELD - define observed state of cluster
 	// Important: Run "make" to regenerate code after modifying this file
 	State string `json:"state"`
@@ -50,24 +50,24 @@ type S3ObjStoreStatus struct {
 //+kubebuilder:object:root=true
 //+kubebuilder:subresource:status
 
-// S3ObjStore is the Schema for the s3objstores API
-type S3ObjStore struct {
+// Website is the Schema for the websites API
+type Website struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 
-	Spec   S3ObjStoreSpec   `json:"spec,omitempty"`
-	Status S3ObjStoreStatus `json:"status,omitempty"`
+	Spec   WebsiteSpec   `json:"spec,omitempty"`
+	Status WebsiteStatus `json:"status,omitempty"`
 }
 
 //+kubebuilder:object:root=true
 
-// S3ObjStoreList contains a list of S3ObjStore
-type S3ObjStoreList struct {
+// WebsiteList contains a list of Website
+type WebsiteList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
-	Items           []S3ObjStore `json:"items"`
+	Items           []Website `json:"items"`
 }
 
 func init() {
-	SchemeBuilder.Register(&S3ObjStore{}, &S3ObjStoreList{})
+	SchemeBuilder.Register(&Website{}, &WebsiteList{})
 }

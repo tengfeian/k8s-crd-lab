@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: website-controller
+spec:
+  replicas: 1
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app: website-controller
+  template:
+    metadata:
+      labels:
+        app: website-controller
+    spec:
+      containers:
+        - image: ghcr.io/tengfeian/website-controller:v0.1.0
+          name: website-controller
+          ports:
+            - containerPort: 80

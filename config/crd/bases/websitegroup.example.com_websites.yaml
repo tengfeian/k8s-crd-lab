@@ -4,20 +4,20 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.14.0
-  name: s3objstores.custom.operator.k8.com.learning.k8.com
+  name: websites.websitegroup.example.com
 spec:
-  group: custom.operator.k8.com.learning.k8.com
+  group: websitegroup.example.com
   names:
-    kind: S3ObjStore
-    listKind: S3ObjStoreList
-    plural: s3objstores
-    singular: s3objstore
+    kind: Website
+    listKind: WebsiteList
+    plural: websites
+    singular: website
   scope: Namespaced
   versions:
   - name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: S3ObjStore is the Schema for the s3objstores API
+        description: Website is the Schema for the websites API
         properties:
           apiVersion:
             description: |-
@@ -37,20 +37,20 @@ spec:
           metadata:
             type: object
           spec:
-            description: S3ObjStoreSpec defines the desired state of S3ObjStore
+            description: WebsiteSpec defines the desired state of Website
             properties:
               locked:
+                description: Locked prevents the deletion of website.
                 type: boolean
               name:
-                description: Foo is an example field of S3ObjStore. Edit s3objstore_types.go
-                  to remove/update
+                description: Name is the name of the Website we want to create.
                 type: string
             required:
             - locked
             - name
             type: object
           status:
-            description: S3ObjStoreStatus defines the observed state of S3ObjStore
+            description: WebsiteStatus defines the observed state of Website
             properties:
               state:
                 description: |-

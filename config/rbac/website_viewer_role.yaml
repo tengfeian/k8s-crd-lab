@@ -1,32 +1,23 @@
----
+# permissions for end users to view websites.
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
-  name: manager-role
+  labels:
+    app.kubernetes.io/name: k8s-crd-lab
+    app.kubernetes.io/managed-by: kustomize
+  name: website-viewer-role
 rules:
 - apiGroups:
   - websitegroup.example.com
   resources:
   - websites
   verbs:
-  - create
-  - delete
   - get
   - list
-  - patch
-  - update
   - watch
-- apiGroups:
-  - websitegroup.example.com
-  resources:
-  - websites/finalizers
-  verbs:
-  - update
 - apiGroups:
   - websitegroup.example.com
   resources:
   - websites/status
   verbs:
   - get
-  - patch
-  - update

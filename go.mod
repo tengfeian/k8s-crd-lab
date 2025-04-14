@@ -1,4 +1,4 @@
-module github.com/dilipkumardk/S3ObjectStoreController
+module github.com/tengfeian/k8s-crd-lab
 
 go 1.21
 

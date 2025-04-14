@@ -2,19 +2,19 @@
 # This file is used to track the info used to scaffold your project
 # and allow the plugins properly work.
 # More info: https://book.kubebuilder.io/reference/project-config.html
-domain: learning.k8.com
+domain: example.com
 layout:
 - go.kubebuilder.io/v4
-projectName: phd-crd-code
-repo: github.com/dilipkumardk/S3ObjectStoreController
+projectName: k8s-crd-lab
+repo: github.com/tengfeian/k8s-crd-lab
 resources:
 - api:
     crdVersion: v1
     namespaced: true
   controller: true
-  domain: learning.k8.com
-  group: custom.operator.k8.com
-  kind: S3ObjStore
-  path: github.com/dilipkumardk/S3ObjectStoreController/api/v1alpha1
+  domain: example.com
+  group: websitegroup
+  kind: Website
+  path: github.com/tengfeian/k8s-crd-lab/api/v1alpha1
   version: v1alpha1
 version: "3"

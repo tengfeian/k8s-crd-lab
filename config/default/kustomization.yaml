@@ -1,12 +1,12 @@
 # Adds namespace to all resources.
-namespace: phd-crd-code-system
+namespace: k8s-crd-lab-system
 
 # Value of this field is prepended to the
 # names of all resources, e.g. a deployment named
 # "wordpress" becomes "alices-wordpress".
 # Note that it should also match with the prefix (text before '-') of the namespace
 # field above.
-namePrefix: phd-crd-code-
+namePrefix: k8s-crd-lab-
 
 # Labels to add to all resources and selectors.
 #labels:

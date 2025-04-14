@@ -24,47 +24,45 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/client"
 	"sigs.k8s.io/controller-runtime/pkg/log"
 
-	customoperatork8comv1alpha1 "github.com/dilipkumardk/S3ObjectStoreController/api/v1alpha1"
+	websitegroupv1alpha1 "github.com/tengfeian/k8s-crd-lab/api/v1alpha1"
 )
 
-// S3ObjStoreReconciler reconciles a S3ObjStore object
-type S3ObjStoreReconciler struct {
+// WebsiteReconciler reconciles a Website object
+type WebsiteReconciler struct {
 	client.Client
 	Scheme *runtime.Scheme
 }
 
-//+kubebuilder:rbac:groups=custom.operator.k8.com.learning.k8.com,resources=s3objstores,verbs=get;list;watch;create;update;patch;delete
-//+kubebuilder:rbac:groups=custom.operator.k8.com.learning.k8.com,resources=s3objstores/status,verbs=get;update;patch
-//+kubebuilder:rbac:groups=custom.operator.k8.com.learning.k8.com,resources=s3objstores/finalizers,verbs=update
+//+kubebuilder:rbac:groups=websitegroup.example.com,resources=websites,verbs=get;list;watch;create;update;patch;delete
+//+kubebuilder:rbac:groups=websitegroup.example.com,resources=websites/status,verbs=get;update;patch
+//+kubebuilder:rbac:groups=websitegroup.example.com,resources=websites/finalizers,verbs=update
 
 // Reconcile is part of the main kubernetes reconciliation loop which aims to
 // move the current state of the cluster closer to the desired state.
 // TODO(user): Modify the Reconcile function to compare the state specified by
-// the S3ObjStore object against the actual cluster state, and then
+// the Website object against the actual cluster state, and then
 // perform operations to make the cluster state reflect the state specified by
 // the user.
 //
 // For more details, check Reconcile and its Result here:
 // - https://pkg.go.dev/sigs.k8s.io/controller-runtime@v0.17.3/pkg/reconcile
-func (r *S3ObjStoreReconciler) Reconcile(ctx context.Context, req ctrl.Request) (ctrl.Result, error) {
+func (r *WebsiteReconciler) Reconcile(ctx context.Context, req ctrl.Request) (ctrl.Result, error) {
 	logger := log.FromContext(ctx)
-
-	// TODO(user): your logic here
-	instance := &customoperatork8comv1alpha1.S3ObjStore{}
+	instance := &websitegroupv1alpha1.Website{}
 	if err := r.Get(ctx, req.NamespacedName, instance); err != nil {
 		logger.Error(err, "Unable to get resource")
 		return ctrl.Result{}, client.IgnoreNotFound(err)
 	}
 	if instance.Status.State == "" {
-		instance.Status.State = customoperatork8comv1alpha1.PENDING_STATE
+		instance.Status.State = websitegroupv1alpha1.PENDING_STATE
 		r.Status().Update(ctx, instance)
 	}
 	return ctrl.Result{}, nil
 }
 
 // SetupWithManager sets up the controller with the Manager.
-func (r *S3ObjStoreReconciler) SetupWithManager(mgr ctrl.Manager) error {
+func (r *WebsiteReconciler) SetupWithManager(mgr ctrl.Manager) error {
 	return ctrl.NewControllerManagedBy(mgr).
-		For(&customoperatork8comv1alpha1.S3ObjStore{}).
+		For(&websitegroupv1alpha1.Website{}).
 		Complete(r)
 }

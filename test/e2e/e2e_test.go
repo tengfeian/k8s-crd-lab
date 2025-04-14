@@ -24,10 +24,10 @@ import (
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
 
-	"github.com/dilipkumardk/S3ObjectStoreController/test/utils"
+	"github.com/tengfeian/k8s-crd-lab/test/utils"
 )
 
-const namespace = "phd-crd-code-system"
+const namespace = "k8s-crd-lab-system"
 
 var _ = Describe("controller", Ordered, func() {
 	BeforeAll(func() {
@@ -60,7 +60,7 @@ var _ = Describe("controller", Ordered, func() {
 			var err error
 
 			// projectimage stores the name of the image used in the example
-			var projectimage = "example.com/phd-crd-code:v0.0.1"
+			var projectimage = "example.com/k8s-crd-lab:v0.0.1"
 
 			By("building the manager(Operator) image")
 			cmd := exec.Command("make", "docker-build", fmt.Sprintf("IMG=%s", projectimage))
