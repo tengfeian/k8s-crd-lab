@@ -1,4 +1,4 @@
 # kustomization.yaml
 resources:
   - crd.yaml
-  - cr-instance.yaml
+  - cr.yaml
