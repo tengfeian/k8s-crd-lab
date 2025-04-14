@@ -18,6 +18,7 @@ package controller
 
 import (
 	"context"
+	"time"
 
 	"k8s.io/apimachinery/pkg/runtime"
 	ctrl "sigs.k8s.io/controller-runtime"
@@ -57,6 +58,24 @@ func (r *WebsiteReconciler) Reconcile(ctx context.Context, req ctrl.Request) (ct
 		instance.Status.State = websitegroupv1alpha1.PENDING_STATE
 		r.Status().Update(ctx, instance)
 	}
+	logger.Info("Set status to PENDING for CR", "name", instance.Name)
+
+	// Initialize annotations map if nil
+	if instance.Annotations == nil {
+		instance.Annotations = make(map[string]string)
+	}
+
+	// Add or update an annotation
+	instance.Annotations["website-controller/last-updated"] = time.Now().Format(time.RFC3339)
+
+	// Update the resource
+	if err := r.Update(ctx, instance); err != nil {
+		logger.Error(err, "unable to update annotations on Deployment")
+		return ctrl.Result{}, err
+	}
+
+	logger.Info("Updated annotation on CR", "name", instance.Name)
+
 	return ctrl.Result{}, nil
 }
 
