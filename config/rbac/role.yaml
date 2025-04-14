@@ -1,0 +1,32 @@
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: manager-role
+rules:
+- apiGroups:
+  - custom.operator.k8.com.learning.k8.com
+  resources:
+  - s3objstores
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - custom.operator.k8.com.learning.k8.com
+  resources:
+  - s3objstores/finalizers
+  verbs:
+  - update
+- apiGroups:
+  - custom.operator.k8.com.learning.k8.com
+  resources:
+  - s3objstores/status
+  verbs:
+  - get
+  - patch
+  - update
