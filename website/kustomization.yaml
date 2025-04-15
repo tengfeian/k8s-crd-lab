@@ -2,4 +2,4 @@
 resources:
   - crd.yaml
   - cr.yaml
-#  - controller.yaml
+  - controller.yaml

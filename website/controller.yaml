@@ -14,7 +14,7 @@ spec:
         app: website-controller
     spec:
       containers:
-        - image: ghcr.io/tengfeian/website-controller:v0.1.0
+        - image: ghcr.io/tengfeian/website-controller:v0.1.1
           name: website-controller
           ports:
             - containerPort: 80
