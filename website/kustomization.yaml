@@ -24,8 +24,8 @@ resources:
   - ../config/crd
   - ../config/samples
 #  - ../config/rbac
-  - ../config/rbac/role.yaml
-  - ../config/rbac/service_account.yaml
-  - ../config/rbac/role_binding.yaml
-  - controller.yaml
+#  - ../config/rbac/role.yaml
+#  - ../config/rbac/service_account.yaml
+#  - ../config/rbac/role_binding.yaml
+#  - controller.yaml
 
