@@ -21,7 +21,7 @@ namePrefix: k8s-crd-lab-
 #    someName: someValue
 
 resources:
-  - ../crd
-  - ../rbac
+  - ../config/crd
+  - ../config/rbac
   - ../config/samples
   - controller.yaml
