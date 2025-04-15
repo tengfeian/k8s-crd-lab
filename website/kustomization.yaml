@@ -1,5 +1,27 @@
 # kustomization.yaml
+#resources:
+#  - crd.yaml
+#  - cr.yaml
+#  - controller.yaml
+
+# Adds namespace to all resources.
+namespace: k8s-crd-lab-system
+
+# Value of this field is prepended to the
+# names of all resources, e.g. a deployment named
+# "wordpress" becomes "alices-wordpress".
+# Note that it should also match with the prefix (text before '-') of the namespace
+# field above.
+namePrefix: k8s-crd-lab-
+
+# Labels to add to all resources and selectors.
+#labels:
+#- includeSelectors: true
+#  pairs:
+#    someName: someValue
+
 resources:
-  - crd.yaml
-  - cr.yaml
+  - ../crd
+  - ../rbac
+  - ../config/samples
   - controller.yaml
