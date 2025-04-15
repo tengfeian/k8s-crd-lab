@@ -18,12 +18,12 @@ package controller
 
 import (
 	"context"
-	"time"
-
 	"k8s.io/apimachinery/pkg/runtime"
 	ctrl "sigs.k8s.io/controller-runtime"
 	"sigs.k8s.io/controller-runtime/pkg/client"
 	"sigs.k8s.io/controller-runtime/pkg/log"
+	"strconv"
+	"time"
 
 	websitegroupv1alpha1 "github.com/tengfeian/k8s-crd-lab/api/v1alpha1"
 )
@@ -57,24 +57,36 @@ func (r *WebsiteReconciler) Reconcile(ctx context.Context, req ctrl.Request) (ct
 	if instance.Status.State == "" {
 		instance.Status.State = websitegroupv1alpha1.PENDING_STATE
 		r.Status().Update(ctx, instance)
+		logger.Info("Set status to PENDING for CR", "name", instance.Name)
 	}
-	logger.Info("Set status to PENDING for CR", "name", instance.Name)
 
 	// Initialize annotations map if nil
+	currentTime := time.Now().Format(time.RFC3339)
+	currrenTimeStr := strconv.FormatInt(time.Now().Unix(), 10)
 	if instance.Annotations == nil {
 		instance.Annotations = make(map[string]string)
+		// Add or update an annotation
+		instance.Annotations["website-controller/last-updated-"+currrenTimeStr] = currentTime
+	} else {
+		instance.Annotations["website-controller/last-updated-"+currrenTimeStr] = currentTime
 	}
-
-	// Add or update an annotation
-	instance.Annotations["website-controller/last-updated"] = time.Now().Format(time.RFC3339)
-
 	// Update the resource
 	if err := r.Update(ctx, instance); err != nil {
 		logger.Error(err, "unable to update annotations on Deployment")
 		return ctrl.Result{}, err
 	}
-
 	logger.Info("Updated annotation on CR", "name", instance.Name)
+
+	if instance.Spec.Locked == false {
+		instance.Spec.Locked = true
+		if err := r.Update(ctx, instance); err != nil {
+			logger.Error(err, "failed to update Website spec")
+			return ctrl.Result{}, err
+		}
+		logger.Info("Updated spec.locked of Website", "name", instance.Name)
+		// Return here to avoid continuing with stale data
+		return ctrl.Result{Requeue: true}, nil
+	}
 
 	return ctrl.Result{}, nil
 }

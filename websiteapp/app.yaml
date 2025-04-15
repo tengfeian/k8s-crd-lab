@@ -1,0 +1,25 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: websiteapp
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/tengfeian/k8s-crd-lab.git
+    targetRevision: argocd/diff-customization
+    path: website
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: default
+  syncPolicy:
+    automated:
+      prune:  true
+      allowEmpty: true
+      selfHeal: true
+    retry:
+      backoff:
+        duration: 5s
+        factor: 1
+        maxDuration: 15s
+      limit: 1000000
