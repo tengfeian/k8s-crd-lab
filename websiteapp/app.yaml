@@ -22,9 +22,9 @@ spec:
       selfHeal: true
     retry:
       backoff:
-        duration: 3m
+        duration: 1m
         factor: 1
-        maxDuration: 5m
+        maxDuration: 2m
       limit: 1000000
 #  ignoreDifferences:
 #    - group: websitegroup.example.com
