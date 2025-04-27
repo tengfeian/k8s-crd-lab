@@ -1,7 +1,7 @@
 # kustomization.yaml
-#resources:
-#  - crd.yaml
-#  - cr.yaml
+resources:
+  - crd.yaml
+  - cr.yaml
 #  - controller.yaml
 
 # Adds namespace to all resources.
@@ -20,9 +20,9 @@
 #  pairs:
 #    someName: someValue
 
-resources:
-  - ../config/crd
-  - ../config/samples
+#resources:
+#  - ../config/crd
+#  - ../config/samples
 #  - ../config/rbac
 #  - ../config/rbac/role.yaml
 #  - ../config/rbac/service_account.yaml
