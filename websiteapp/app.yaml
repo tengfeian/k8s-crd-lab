@@ -22,7 +22,14 @@ spec:
       selfHeal: true
     retry:
       backoff:
-        duration: 5s
+        duration: 3m
         factor: 1
-        maxDuration: 15s
+        maxDuration: 5m
       limit: 1000000
+  ignoreDifferences:
+    - group: apps
+      kind: Website
+      name: website-sample
+      namespace: default
+      jsonPointers:
+        - /spec/locked
