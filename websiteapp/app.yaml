@@ -7,7 +7,8 @@ spec:
   project: default
   source:
     repoURL: https://github.com/tengfeian/k8s-crd-lab.git
-    targetRevision: argocd/diff-customization/locked_true
+#    targetRevision: argocd/diff-customization/locked_true
+    targetRevision: argocd/diff-customization/locked_false
 #    targetRevision: test_locked_v1.0_true
 #    targetRevision: test_locked_v2_false
     path: website
