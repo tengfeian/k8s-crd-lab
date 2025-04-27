@@ -27,9 +27,13 @@ spec:
         maxDuration: 5m
       limit: 1000000
   ignoreDifferences:
-    - group: apps
+    - group: websitegroup.example.com
       kind: Website
       name: website-sample
       namespace: default
       jsonPointers:
         - /spec/locked
+#    - group: "*"
+#      kind: "*"
+#      managedFieldsManagers:
+#        - kube-controller-manager
