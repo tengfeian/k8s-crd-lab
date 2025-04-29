@@ -7,7 +7,7 @@ spec:
   project: default
   source:
     repoURL: https://github.com/tengfeian/k8s-crd-lab.git
-    targetRevision: argocd-istio/traffic-splitting/subset-level
+    targetRevision: argocd-istio/traffic-splitting/subset-level-withoutDeployRollOut
     path: istio/subset-level-traffic-splitting
   destination:
     server: https://kubernetes.default.svc
