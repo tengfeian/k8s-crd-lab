@@ -23,8 +23,8 @@ spec:
         factor: 1
         maxDuration: 4m
       limit: 1000000
-  ignoreDifferences:
-    - group: networking.istio.io
-      kind: VirtualService
-      jsonPointers:
-        - /spec/http/0
+#  ignoreDifferences:
+#    - group: networking.istio.io
+#      kind: VirtualService
+#      jsonPointers:
+#        - /spec/http/0
