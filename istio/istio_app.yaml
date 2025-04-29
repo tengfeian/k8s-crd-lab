@@ -1,0 +1,30 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: istioapp
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/tengfeian/k8s-crd-lab.git
+    targetRevision: argocd-istio/traffic-splitting/subset-level
+    path: istio/subset-level-traffic-splitting
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: default
+  syncPolicy:
+    automated:
+      prune:  true
+      allowEmpty: true
+      selfHeal: true
+    retry:
+      backoff:
+        duration: 2m
+        factor: 1
+        maxDuration: 4m
+      limit: 1000000
+#  ignoreDifferences:
+#    - group: networking.istio.io
+#      kind: VirtualService
+#      jsonPointers:
+#        - /spec/http/0
